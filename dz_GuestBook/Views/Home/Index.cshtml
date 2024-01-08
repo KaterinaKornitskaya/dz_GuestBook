@@ -1,0 +1,115 @@
+﻿@model IEnumerable<dz_GuestBook.Models.Messages>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Гостевая книга</h1>
+   
+
+
+    @if (Context.Session.GetString("Login")!=null)
+    {
+        <p>
+            <a asp-action="Create" asp-controller="Messages">Создать сообщение</a>
+        </p>       
+    }
+   @*  <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Message)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MessageDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Login)
+                </th>
+               
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Message)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MessageDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Login)
+                    </td>
+                   
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table> *@
+
+    <section id="testimonial_area" class="section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="testmonial_slider_area text-center owl-carousel">
+                        @foreach (var item in Model)
+                        {
+                            <div class="box-area">
+                                <div class="img-area">
+                                    <img src="img/1.jpg" alt="">
+                                </div>
+                                <h5>
+                                    @Html.DisplayFor(modelItem => item.User.Login)
+                                </h5>
+                                <span>
+                                    @Html.DisplayFor(modelItem => item.MessageDate)
+                                </span>
+                                <p class="content">
+                                    @Html.DisplayFor(modelItem => item.Message)
+                                </p>
+                            </div> <!-- END SINGLE TESTIMONIALS -->
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+    <script>
+        $(".testmonial_slider_area").owlCarousel({
+            autoplay: true,
+            slideSpeed: 1000,
+            items: 3,
+            loop: true,
+            nav: true,
+            navText: ['<i class="fa fa-arrow-left"></i>', '<i class="fa fa-arrow-right"></i>'],
+            margin: 30,
+            dots: true,
+            responsive: {
+                320: {
+                    items: 1
+                },
+                767: {
+                    items: 2
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+    </script>
+</div>
